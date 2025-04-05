@@ -11,7 +11,6 @@ import dash_bootstrap_components as dbc
 
 def load_and_clean_data(filepath):
     df = pd.read_csv(filepath)
-    
     for col in ['Total', 'Men', 'Women']:
         if col in df.columns:
             df[col] = df[col].astype(str).str.replace(',', '').str.replace('"', '')
@@ -55,7 +54,7 @@ def get_province_data():
     return provinces
 
 try:
-    df = load_and_clean_data('cleaned_data.csv')
+    df = load_and_clean_data('data.csv')
 except:
     df = pd.DataFrame()
 
@@ -491,7 +490,7 @@ def update_custom_insight_graph(category, analysis_type):
     
     if analysis_type == "hierarchy":
         filtered_df = filtered_df.copy()
-        filtered_df['Level'] = filtered_df['Occupation'].apply(lambda x: len(x) - len(x.lstrip(' ')) // 2
+        filtered_df['Level'] = filtered_df['Occupation'].apply(lambda x: (len(x) - len(x.lstrip(' '))) // 2
         
         level_data = filtered_df.groupby('Level').agg({
             'Men': 'sum',
