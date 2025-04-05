@@ -490,7 +490,7 @@ def update_custom_insight_graph(category, analysis_type):
     
     if analysis_type == "hierarchy":
         filtered_df = filtered_df.copy()
-        filtered_df['Level'] = filtered_df['Occupation'].apply(lambda x: (len(x) - len(x.lstrip(' '))) // 2
+        filtered_df['Level'] = filtered_df['Occupation'].apply((lambda x: (len(x) - len(x.lstrip(' '))) // 2
         
         level_data = filtered_df.groupby('Level').agg({
             'Men': 'sum',
